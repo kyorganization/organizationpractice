@@ -1,0 +1,166 @@
+# ✂️ Slicing
+Syntax: sequence[start:end:step]
+
+- start → index where slicing begins  
+- end   → index where slicing stops (not included)  
+- step  → jump size (how many steps to skip)  
+
+Example with string "INDIA":
+I  N  D  I  A  
+0  1  2  3  4  
+-5 -4 -3 -2 -1  
+
+a = "INDIA"
+print(a[1:4])   # "NDI" → starts at index 1, stops before 4
+print(a[:4])    # "INDI" → starts at 0, stops before 4
+
+# 📊 Flowchart: Slicing
+        ┌───────────────┐
+        │   Start        │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Take sequence   │
+        │ [start:end:step]│
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ If start empty? │───Yes──► Use 0
+        └───────┬────────┘
+                │No
+                ▼
+        ┌───────────────┐
+        │ If end empty? │───Yes──► Use length of string
+        └───────┬───────┘
+                │No
+                ▼
+        ┌───────────────┐
+        │ Apply step     │
+        │ (default=1)    │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Return sliced   │
+        │ substring       │
+        └────────────────┘
+
+
+# 🔡 String Methods
+
+.upper()      → converts all letters to UPPERCASE  
+.lower()      → converts all letters to lowercase  
+.title()      → capitalizes first letter of each word  
+.capitalize() → capitalizes only the first letter of the string  
+.strip()      → removes spaces from both ends  
+.lstrip()     → removes spaces from left side  
+.rstrip()     → removes spaces from right side  
+.replace(old,new) → replaces substring  
+.count(sub)   → counts occurrences of substring  
+.find(sub)    → returns first index of substring  
+.startswith() → checks if string starts with given substring (bool)  
+.endswith()   → checks if string ends with given substring (bool)  
+.split()      → splits string into list  
+.join(list)   → joins list elements into string  
+.isalpha()    → True if all chars are alphabets  
+.isdigit()    → True if all chars are digits  
+.isalnum()    → True if string is alphanumeric  
+.isspace()    → True if string contains only spaces  
+
+# 📊 Flowchart: Example of .upper()
+        ┌───────────────┐
+        │   Input text   │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ For each char   │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Is it a letter? │──No──► Keep same
+        └───────┬────────┘
+                │Yes
+                ▼
+        ┌───────────────┐
+        │ Convert to     │
+        │ uppercase      │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Append to new   │
+        │ string          │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Return result   │
+        └────────────────┘
+
+# 📝 Examples
+text = "python programming"
+print("original :", text)
+print("uppercase:", text.upper())
+print("lowercase:", text.lower())
+print("titlecase:", text.title())
+print("capitalize:", text.capitalize())
+print("strip:", text.strip())
+print("replace:", text.replace("python","java"))
+print("starts with py:", text.startswith("py"))
+print("ends with ing:", text.endswith("ing"))
+print("count of m:", text.count("m"))
+print("space check:", text.isspace())
+
+
+# 🔗 Split and Join
+name = "india-is-my-country"
+print(name.split("-"))   # ['india','is','my','country']
+
+lst = ["india","is","my","country"]
+print("-".join(lst))     # "india-is-my-country"
+
+
+# 🔠 ASCII Codes
+👉 ASCII = American Standard Code for Information Interchange  
+👉 It assigns a unique integer value to every character (alphabets, digits, symbols).  
+
+Examples:
+A → 65  
+B → 66  
+a → 97  
+
+Functions:
+ord() → converts character into ASCII number  
+chr() → converts ASCII number back to character  
+
+# 📊 Flowchart: ASCII Conversion
+Character → ord() → Integer (ASCII code)  
+Integer → chr() → Character  
+
+        ┌───────────────┐
+        │   Input char   │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Call ord(char)  │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Return integer  │
+        │ ASCII value     │
+        └────────────────┘
+
+        ┌───────────────┐
+        │ Input integer  │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Call chr(int)   │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Return char     │
+        └────────────────┘
+
+# 📝 Examples
+print(ord("A"))   # 65
+print(ord("a"))   # 97
+print(chr(65))    # "A"
+print(chr(97))    # "a"

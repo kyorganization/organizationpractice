@@ -1,0 +1,81 @@
+# Functions
+
+-> Functions are reusable blocks of code that perform specific tasks
+-> They help us:
+   - Avoid code repetition
+   - Organize code into logical blocks
+   - Make code maintainable and easier to debug
+   - Improve readability by giving meaningful names to operations
+
+# Why use functions?
+- Reduce duplication of code
+
+# Basic function syntax
+
+def function_name():
+    '''doc string: describes what function does'''
+    # function body
+    # code to execute
+    # return result
+
+# Components of a function
+- def : keyword to create a function
+- parameters : variables inside function definition
+- arguments : values passed when calling the function
+
+
+# Function with multiple parameters
+
+def calculate_rectangle_area(length, width):
+    area = length * width
+    print(area)
+
+calculate_rectangle_area(5, 6)
+
+
+# Keyword arguments
+
+def book_ticket(passenger, destination, seat_cls, price):
+    print(f"Ticket booked for {passenger}")
+    print(f"Destination : {destination}")
+    print(f"Class : {seat_cls}")
+    print(f"Price : {price}")
+
+book_ticket(destination="Paris", passenger="Sarah", price=450, seat_cls="First")
+
+
+# Default parameters
+-> Functions can have default values that are used if no argument is provided
+
+def greet(name="Guest"):
+    print(f"Hello, {name}!")
+
+greet()
+greet("Saikumar")
+
+
+# Variable-length arguments
+
+# *args -> accepts any number of positional arguments
+def cal_sum(*a):
+    print(a)
+    print(sum(a))
+
+cal_sum(1, 2, 3, 4)
+
+
+# **kwargs -> accepts any number of keyword arguments
+def display_info(**products):
+    print(f"Product information : {products}")
+
+display_info(name="Laptop", brand="Dell")
+
+
+# Order of arguments in functions:
+# positional -> *args -> default -> **kwargs
+
+# Combining different argument types
+def demo_func(a, b, *args, c=10, **kwargs):
+    print(f"a={a}, b={b}, args={args}, c={c}, kwargs={kwargs}")
+
+demo_func(1, 2, 3, 4, 5, c=20, x=100, y=200)

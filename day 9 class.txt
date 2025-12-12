@@ -1,0 +1,173 @@
+# Dictionaries
+
+• A dictionary is a collection of key-value pairs
+• Unordered before Python 3.7, insertion-ordered after Python 3.7+
+• Mutable (can be changed)
+• Keys must be unique and immutable (strings, numbers, tuples)
+• Very fast lookup by key
+• Syntax: {key:value, key2:value2}
+• Represents real-world objects and relationships
+
+# Creating dictionaries
+
+empty = {}
+
+person = {
+    "name": "sai",
+    "age": 24,
+    "height": 5.8,
+    "married": True,
+    "hobbies": ["reading","swimming"],
+    "address": {"area":"syn","pincode":515004}
+}
+
+# Creating empty dictionary
+empty_dict = {}
+
+# Using dict() constructor
+e = dict()
+print(type(e))
+
+# Simple dictionary
+person = {"name":"sai","age":24}
+print(person)
+
+# Using dict() with keyword arguments
+person1 = dict(name="sai", age=20)
+print(person1)
+
+# Creating dictionary from list of tuples
+pairs = [("a",1),("b",2),("c",3)]
+d = dict(pairs)
+print(d)
+
+
+# Accessing dictionary elements
+
+product = {
+    "name":"laptop",
+    "brand":"dell",
+    "price":50000,
+    "in_stock":True
+}
+
+# Method 1: Using square brackets []
+print(product["name"])
+print(product["price"])
+# print(product["color"]) -> KeyError
+
+# Method 2: Using .get()
+print(product.get("name"))
+print(product.get("price"))
+print(product.get("color"))   # None
+
+# Why use get()?
+# [] throws error if key not found, .get() returns None or default value
+print(product.get("name","hp"))
+
+
+# Dictionary operations
+
+car = {"brand":"toyota","model":"camry","year":2020}
+print(car)
+
+# Adding new elements
+car["color"] = "blue"
+car["price"] = 2500000
+print(car)
+
+# Modifying existing values
+car["year"] = 2023
+print(car)
+
+# Update multiple values
+car.update({"mileage":20,"color":"red","owner":"john"})
+print(car)
+
+# Removing elements
+del car["mileage"]
+print(car)
+
+# Using .pop() -> returns removed value
+removed_price = car.pop("price")
+print(removed_price)
+print(car)
+
+# Using .popitem() -> removes last inserted item
+removed_item = car.popitem()
+print(removed_item)
+print(car)
+
+# Using .clear()
+temp_dict = {"name":"sai","age":24}
+temp_dict.clear()
+print(temp_dict)
+
+
+# Dictionary methods
+
+inventory = {
+    "apple":50,
+    "bananas":30,
+    "oranges":25,
+    "grapes":40
+}
+
+# keys()
+k = inventory.keys()
+print(k)
+print(list(k))
+
+# values()
+v = inventory.values()
+print(v)
+print(list(v))
+print(sum(v))
+
+# items()
+items = inventory.items()
+print(items)
+print(list(items))
+
+# setdefault()
+print(inventory)
+mango_count = inventory.setdefault("mangoes",20)
+print(mango_count)
+
+apple_count = inventory.setdefault("apple",100)
+print(apple_count)   # prints 50 because key already exists
+
+
+# copy()
+original = {"a":1,"b":2,"c":3}
+c = original.copy()
+print(original)
+print(c)
+
+c["d"] = 4
+print(c)
+
+
+# Looping through dictionaries
+
+scores = {"alice":95,"bob":87,"charlie":92,"diana":88}
+
+# Loop through keys
+for name in scores:
+    print(name)
+
+for name in scores.keys():
+    print(name)
+
+# Loop through values
+for s in scores.values():
+    print(s)
+
+# Loop through key-value pairs
+for name, score in scores.items():
+    print(f"{name} scored {score}")
+
+# Conditional loop
+for name, score in scores.items():
+    if score > 90:
+        print(f"{name} scored {score}")

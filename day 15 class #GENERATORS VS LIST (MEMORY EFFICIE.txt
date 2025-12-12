@@ -1,0 +1,170 @@
+# GENERATORS VS LIST (Memory Efficient)
+
+import sys
+
+# List approach - stores everything
+def get_numbers_list(n):
+    """returns list of n numbers"""
+    return [x for x in range(n)]
+
+# Generator approach - yields one at a time
+def get_numbers_generator(n):
+    """yields n numbers one at a time"""
+    for x in range(n):
+        yield x
+
+# Compare memory usage
+number_list = get_numbers_list(1000)
+numbers_gen = get_numbers_generator(1000)
+
+print(f"list size in memory : {sys.getsizeof(number_list)} bytes")
+print(f"generator size in memory : {sys.getsizeof(numbers_gen)} bytes")
+print(f"\ngenerator uses ~{sys.getsizeof(number_list)//sys.getsizeof(numbers_gen)}X less memory")
+
+# Countdown generator
+def countdown_generator(n):
+    print("generator starting")
+    while n > 0:
+        yield n
+        n -= 1
+    print("blast off !!")
+
+print("countdown using for loop :")
+for n in countdown_generator(5):
+    print(n)
+
+
+# Understanding Errors and Exceptions
+
+"""
+Two types of errors:
+
+1. Syntax Errors (parsing errors)
+   - Detected by the parser before code execution
+   - Code won't run until fixed
+   - Examples: missing colon, wrong indentation
+
+2. Exceptions (runtime errors)
+   - Occur during program execution
+   - Can be caught and handled
+   - Program can continue running after handling
+   - Examples: dividing by zero, accessing missing file
+
+Traceback shows where the error occurred.
+
+Why handle errors?
+- Prevents program crashes
+- Provides better user experience
+- Enables logging and debugging
+- Makes code more robust and reliable
+"""
+
+# Example: result = 10/0
+
+
+# BASIC TRY-EXCEPT
+
+"""
+Syntax:
+    try:
+        # code that might raise an exception
+    except:
+        # code to handle that exception
+
+How it works:
+1. Python attempts to execute code in "try" block
+2. If an exception occurs, execution jumps to the "except" block
+3. If no exception occurs, the "except" block is skipped
+4. Code continues after the try-except block
+"""
+
+def safe_divide(a, b):
+    """divides with error handling"""
+    try:
+        return a / b
+    except ZeroDivisionError:
+        print("division by zero")
+
+print(safe_divide(10, 2))
+print(safe_divide(10, 0))
+
+
+# Handling user input
+def get_integer_input():
+    """gets an integer from user with error handling"""
+    try:
+        user_input = input("Enter a number: ")
+        number = int(user_input)
+        return number
+    except ValueError:
+        print("enter a valid integer")
+        return None
+
+number = get_integer_input()
+if number is not None:
+    print(f"you have entered {number}")
+
+
+# MULTI-EXCEPTION TYPES
+
+"""
+Method 1:
+try:
+    # code
+except TypeError:
+    # handle type error
+except ValueError:
+    # handle value error
+
+Method 2 (tuple):
+try:
+    # code
+except (TypeError, ValueError):
+    # handle exception error
+
+Method 3 (catch-all with specific handlers):
+try:
+    # code
+except TypeError:
+    # handle type error
+except:
+    # handle anything else
+
+Exception order matters: put more specific handlers first
+"""
+
+# Example: grouping exceptions
+def calculate(a, b, operation):
+    try:
+        if operation == "+":
+            return a + b
+        elif operation == "-":
+            return a - b
+        elif operation == "*":
+            return a * b
+        elif operation == "/":
+            return a / b
+        elif operation == "**":
+            return a ** b
+        else:
+            return None
+    except (ValueError, TypeError):
+        print("invalid operation")
+        return None
+    except ZeroDivisionError:
+        print("division by zero")
+        return None
+
+print(calculate(1, 2, "+"))
+print(calculate(1, 2, ""))
+
+
+# Accessing exception details
+def detailed_error_handling(value):
+    try:
+        result = 100 / int(value)
+        return result
+    except ZeroDivisionError as e:
+        print("division by zero:", e)
+    except ValueError as e:
+        print("invalid value:", e)

@@ -1,0 +1,170 @@
+# 🕰️ Intro to datetime module
+
+👉 The `datetime` module in Python helps us work with:
+- 📅 Dates
+- ⏰ Times
+- 📆 Date + Time
+- 🔄 Time differences (timedelta)
+
+
+# 📅 Date Class → working only with dates (year, month, day)
+
+import datetime
+
+today = datetime.date.today()
+print("Today's date:", today)
+
+# YY-MM-DD format
+d = datetime.date(2025, 12, 10)
+print("Custom date:", d)
+print("Type:", type(d))
+
+print("Year:", d.year)
+print("Month:", d.month)
+print("Day:", d.day)
+
+# 🎯 Useful attributes of date object
+# - year
+# - month
+# - day
+
+# weekday() → Monday=0 ... Sunday=6
+# isoweekday() → Monday=1 ... Sunday=7
+
+d = datetime.date(2025, 12, 11)
+print("weekday():", d.weekday())       # 3 → Thursday
+print("isoweekday():", d.isoweekday()) # 4 → Thursday
+
+
+# ⏰ TIME Class → working only with time (hours, minutes, seconds, microseconds)
+
+t = datetime.time(hour=12, minute=30, second=15)
+print("Time object:", t)
+print("Type:", type(t))
+
+# Attributes
+print("Hour:", t.hour)
+print("Minute:", t.minute)
+print("Second:", t.second)
+print("Microsecond:", t.microsecond)
+
+
+# 📆 DATETIME Class → working with both date and time
+
+dt = datetime.datetime.now()
+print("Current datetime:", dt)
+
+dt = datetime.datetime(2025, 12, 10, 12, 30, 20)
+print("Custom datetime:", dt)
+
+# Arguments order:
+# year, month, day, hour, minute, second, microsecond
+
+
+# 🎨 Formatting Dates and Times
+
+now = datetime.datetime.now()
+print("Now:", now)
+print("Type:", type(now))
+
+# strftime → format datetime into string
+formatted = now.strftime("%d-%m-%Y %H:%M:%S")
+print("Formatted:", formatted)
+
+# 📊 Common Directives
+# %a → Weekday short (Wed)
+# %A → Weekday full (Wednesday)
+# %d → Day of month (01–31)
+# %b → Month short (Dec)
+# %B → Month full (December)
+# %m → Month number (01–12)
+# %y → Year short (25)
+# %Y → Year full (2025)
+# %H → Hour (00–23)
+# %I → Hour (00–12)
+# %p → AM/PM
+# %M → Minute (00–59)
+# %S → Second (00–59)
+# %f → Microsecond
+# %Z → Timezone
+# %U → Week number (Sunday first)
+# %W → Week number (Monday first)
+
+x = datetime.datetime.now()
+print("Today's date is:", x)
+print("Month + Weekday:", x.strftime("%m-%A"))
+b = x.strftime("%B")
+print("Month name:", b)
+print("Type:", type(b))
+
+
+# 📥 Parsing Strings into datetime
+s = "10-12-2025 14:30:00"
+dt = datetime.datetime.strptime(s, "%d-%m-%Y %H:%M:%S")
+print("Parsed datetime:", dt)
+
+formatted = dt.strftime("%d-%m-%Y-%A %H:%M:%S")
+print("Formatted again:", formatted)
+
+
+# 🔄 Time Differences (timedelta)
+
+d1 = datetime.date(2025, 12, 10)
+d2 = datetime.date(2025, 12, 25)
+diff = d2 - d1
+print("Difference:", diff)
+print("Type:", type(diff))
+print("Start date:", d1)
+
+
+# 🎂 Age Calculation Example
+
+dob = datetime.date(2001, 1, 31)
+today = datetime.date.today()
+
+age = today.year - dob.year
+if (today.month, today.day) < (dob.month, dob.day):
+    age -= 1
+
+print("Age:", age)
+
+
+# 🎂 Age Calculation Example
+
+dob = datetime.date(2001, 1, 31)
+today = datetime.date.today()
+
+age = today.year - dob.year
+if (today.month, today.day) < (dob.month, dob.day):
+    age -= 1
+
+print("Age:", age)
+
+
+# 📊 Flowchart: Age Calculation
+        ┌───────────────┐
+        │   Get DOB      │
+        │   Get Today    │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Subtract years  │
+        │ today.year - dob.year
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Compare month & │
+        │ day of today vs │
+        │ DOB             │
+        └───────┬────────┘
+        Yes     │        No
+(today < dob)   │
+        │       ▼
+        ▼   ┌───────────────┐
+ ┌─────────►│ Age = years    │
+ │          └───────────────┘
+ │
+ ▼
+┌───────────────┐
+│ Age = years-1 │
+└───────────────┘

@@ -1,0 +1,148 @@
+# 📂 Writing a File in Python
+
+with open("my_write_file", 'w') as file:
+    file.write("hello world\n")
+    file.write("how are you")
+
+print("file written successfully")
+
+# Using 'with' → file automatically closes, no need to close manually
+
+try:
+    file = open("my_write_file", "r")
+    content = file.read()
+    print(content)
+finally:
+    file.close()
+
+
+# 📊 Flowchart: File Writing
+        ┌───────────────┐
+        │ open file (w) │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ write content   │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ close file      │
+        └────────────────┘
+
+
+# 📂 File Modes in Python
+
+'r'   → Read-only. Error if file doesn't exist  
+'r+'  → Read and write. Error if file doesn't exist  
+'w'   → Write-only. Overwrites file if exists, else creates new  
+'w+'  → Read and write. Overwrites file or creates new  
+'a'   → Append-only. Adds data to end. Creates file if not exists  
+'a+'  → Read and append. Pointer at end. Creates file if not exists  
+'rb'  → Read in binary mode. File must exist  
+'rb+' → Read and write in binary mode. File must exist  
+'wb'  → Write in binary. Overwrites or creates new  
+'wb+' → Read and write in binary. Overwrites or creates new  
+'ab'  → Append in binary. Creates file if not exists  
+'ab+' → Read and append in binary. Creates file if not exists  
+
+
+# 📝 Examples
+
+# Append mode
+# with open("ex.txt", 'a') as file:
+#     file.write("\nthis is a new line")
+
+# Read + Write mode
+# with open("ex.txt", 'r+') as file:
+#     content = file.read()
+#     print(f'before writing: {content}')
+#     file.write("\n hi I'm new line")
+
+with open("ex.txt", "w+") as file:
+    file.write("hello, world\n")
+    file.seek(0)
+    content = file.read()
+    print(content)
+
+
+# 🌐 Introduction to JSON
+
+👉 JSON = JavaScript Object Notation  
+👉 Common uses:
+- APIs  
+- Data exchange between frontend & backend  
+- Storing configuration  
+
+✅ Why JSON is popular?
+- Human readable  
+- Language independent  
+- Used in REST APIs  
+- Supports nested objects  
+- Easy to parse  
+
+# 📊 Flowchart: JSON Conversion
+        ┌───────────────┐
+        │ JSON string    │
+        └───────┬───────┘
+                │ json.loads()
+        ┌───────▼────────┐
+        │ Python object   │
+        └───────┬────────┘
+                │ json.dumps()
+        ┌───────▼────────┐
+        │ JSON string     │
+        └────────────────┘
+
+
+# 🔄 JSON vs Python Data Types
+
+JSON          → Python  
+object {}     → dict  
+array []      → list  
+string        → str  
+number        → int/float  
+true          → True  
+false         → False  
+null          → None  
+
+
+# 📝 Methods
+json.loads() → JSON string → Python object  
+json.dumps() → Python object → JSON string  
+json.load()  → Read JSON from file → Python object  
+json.dump()  → Write Python object → JSON file  
+
+
+# 📝 Examples
+
+import json
+
+json_string = '{"name":"ganesh","age":"25","skills":["python","aws"]}'
+print(type(json_string))
+
+python_obj = json.loads(json_string)
+print(python_obj)
+print(type(python_obj))
+print(python_obj['name'])
+print(python_obj['skills'][0])
+
+# Convert dict to JSON string
+data = {
+    "company": "TCS",
+    "employees": 200,
+    "active": True
+}
+print(type(data))
+json_string = json.dumps(data, indent=4, sort_keys=True)
+print(json_string)
+
+# Read JSON from file
+with open("s.json", 'r') as file:
+    data = json.load(file)
+print(type(data))
+print(data)
+
+# Write JSON to file
+student = {"id":101, "name":"krishna", "marks":[89,95,88]}
+with open("student.json", 'w') as file:
+    json.dump(student, file, indent=4)

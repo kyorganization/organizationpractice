@@ -1,0 +1,107 @@
+# 📦 MODULES
+👉 A module is a file containing Python definitions, functions, and statements  
+👉 It allows us to logically organize our code and reuse it across projects  
+
+## 🔑 Types of Modules
+1️⃣ Built-in modules (e.g., math, os, sys, re)  
+2️⃣ User-defined modules (custom modules created by the user)  
+3️⃣ Third-party modules (installed with pip, e.g., numpy, pandas, requests)  
+
+## ⚙️ Examples with math module
+import math
+from math import *              # imports all functions
+from math import sqrt, pi       # imports specific functions
+import math as m                # alias for module
+
+a = 16
+print(f"using math.sqrt : {math.sqrt(a)}")
+print(f"using sqrt directly : {sqrt(a)}")
+print(f"using alias : {m.sqrt(a)}")
+print(f"using power : {pow(2,5)}")
+
+# 🧮 Example user-defined functions
+def sum_of_two(a, b):
+    return a + b
+
+def sum_of_three(a, b, c):
+    return a + b + c
+
+
+# 🔍 REGULAR EXPRESSIONS (Regex)
+👉 A sequence of characters that define a search pattern  
+👉 Used for:  
+- 🔎 Pattern matching  
+- 📄 Text search  
+- ✅ Validation  
+- 📤 Extraction  
+- 🔄 Replacement  
+
+## 📚 re module functions
+- re.findall() → returns a list of all matches  
+- re.search()  → returns a match object if found  
+- re.split()   → splits string by pattern  
+- re.sub()     → replaces matches with new text  
+
+## 🧩 Metacharacters
+- []  → set of characters (e.g., "[a-m]")  
+- \d  → digits  
+- .   → any character except newline  
+- ^   → starts with  
+- $   → ends with  
+- *   → zero or more occurrences  
+- +   → one or more occurrences  
+- {}  → exact number of occurrences  
+
+## 📝 Examples
+import re
+
+txt = "The rain in spain"
+x = re.findall("[a-m]", txt)
+print(x)
+
+t1 = "hello planet"
+x = re.findall("he..o", t1)
+print(x)
+
+t2 = "hello planet"
+x = re.findall("^hello", t2)
+print(x)
+if x:
+    print("✅ yes, the string starts with 'hello'")
+else:
+    print("❌ no, the string does not start with 'hello'")
+
+y = re.findall("planet$", t2)
+print(y)
+if y:
+    print("✅ yes, the string ends with 'planet'")
+else:
+    print("❌ no, the string does not end with 'planet'")
+
+# Example with * (zero or more)
+t = "helliuhyiyiyjiyiyiyiyo planet"
+x = re.findall("he.*o", t)
+print(x)
+
+# Example with + (one or more)
+tex = "hello world"
+x = re.findall("he.+o", tex)
+print(x)
+
+# Example with {} (exact occurrences)
+txt = "helllo planet"
+x = re.findall("he.{2}o", txt)
+print(x)
+
+
+# 📥 IMPORTING USER MODULES
+from practice1 import *
+from practice1 import sum_of_two, sum_of_three
+
+a = 5
+b = 6
+total = sum_of_two(a, b)
+print(total)
+
+t1 = sum_of_three(4, 5, 6)
+print(t1)

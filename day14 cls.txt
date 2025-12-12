@@ -1,0 +1,214 @@
+# 🎨 DECORATORS
+-> Functions that modify the behaviour of other functions  
+-> They "wrap" another function to extend its functionality  
+-> Use @symbol above the function definition  
+
+✅ Common uses:
+- Logging
+- Timing
+- Authentication
+- Caching
+
+# Key Concepts:
+1. Functions are first-class objects (can be passed as arguments)  
+2. Functions can be defined inside other functions  
+3. Functions can return other functions  
+
+Example: @login_required, @timer
+
+# 📊 Flowchart: How a Decorator Works
+        ┌───────────────┐
+        │   Define func  │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Apply decorator │
+        │   @decorator    │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Wrapper runs    │
+        │ (extra logic)   │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Original func   │
+        │ executes        │
+        └────────────────┘
+
+
+# 📝 Examples
+
+def greet(name):
+    return f"Hello {name}"
+
+# Assign function to variable
+greeting_function = greet
+print(greeting_function("Alice"))
+
+# Pass function as argument
+def call_function(fun, value):
+    return fun(value)
+
+result = call_function(greet, "Bob")
+print(result)
+
+
+# Basic Decorator
+def simple_decorator(func):
+    """Decorator before and after function call"""
+    def wrapper():
+        print("before function call")
+        func()
+        print("after function call")
+    return wrapper
+
+@simple_decorator
+def say_hello():
+    print("hello")
+
+say_hello()
+
+
+# Decorator with arguments
+def decorator_with_args(func):
+    def wrapper(*args, **kwargs):
+        print(f"{func.__name__}({args}, {kwargs})")
+        res = func(*args, **kwargs)
+        print("result:", res)
+    return wrapper
+
+@decorator_with_args
+def add(a, b):
+    return a + b
+
+@decorator_with_args
+def greet(name, greeting="hello"):
+    return f"{greeting}, {name}"
+
+add(5, 3)
+print()
+print(greet("Alice", greeting="hi"))
+
+
+# Timing Decorator
+import time
+
+def timer_decorator(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        res = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"{func.__name__} took {end_time - start_time} seconds")
+        return res
+    return wrapper
+
+@timer_decorator
+def slow_function():
+    time.sleep(1)
+    return "done"
+
+@timer_decorator
+def calculate_sum(n):
+    return sum(range(1, n+1))
+
+print(slow_function())
+print(calculate_sum(1000))
+
+
+# Multiple Decorators
+def upper_case(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result.upper()
+    return wrapper
+
+def exclamation_decorator(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return f"{result}!"
+    return wrapper
+
+@upper_case
+@exclamation_decorator
+def greet(name):
+    return f"Hello {name}"
+
+print(greet("Alice"))
+
+# 📊 Flowchart: Multiple Decorators
+        ┌───────────────┐
+        │ Original func  │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Apply bottom    │
+        │ decorator first │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Apply next one  │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Final result    │
+        └────────────────┘
+
+
+# ⚡ GENERATORS
+-> Special functions that produce values lazily (one at a time)  
+-> Use "yield" keyword instead of "return"  
+-> Remember their state between calls  
+-> Memory efficient (don’t create entire sequence at once)
+
+# Key Differences from regular functions:
+1. Use yield instead of return  
+2. Can yield multiple values over time  
+3. Maintain state between calls  
+4. Very memory efficient  
+
+✅ When to use:
+- Process large files (line by line)  
+- Infinite sequences (e.g., Fibonacci forever)  
+- Data pipelines  
+- When you don’t need all values at once  
+
+# 📊 Flowchart: Generator Execution
+        ┌───────────────┐
+        │ Call generator │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Run until yield │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Pause & return  │
+        │ value           │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Resume from     │
+        │ last yield      │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Continue until  │
+        │ next yield/end  │
+        └────────────────┘
+
+
+# 📝 Example Generator
+def simple_generator():
+    print("starting generator")
+    yield 1
+    print("after first yield")
+    yield 2
+    print("after second yield")
+    yield 3
+    print("end generator")
+
+gen = simple_generator()
+print(next(gen))   # starting generator → yields 1
+print(next(gen))   # after first yield → yields 2
+print(next(gen))   # after second yield → yields 3

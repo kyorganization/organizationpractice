@@ -1,0 +1,128 @@
+# Nested Loops
+
+for outer in something:
+    for inner in something:
+        # body
+
+Example 1:
+for i in range(1,4):
+    for j in range(1,3):
+        print(i, j)
+
+Example 2 (Pattern Printing):
+*
+**
+***
+****
+
+for i in range(1,5):
+    for j in range(1, i+1):
+        print("*", end="")
+    print()
+
+
+# Loops with Else Block
+
+- In Python, both for and while loops can have an else block
+- Else block executes only when the loop finishes normally
+- If loop ends using break, else will not run
+
+Example 1:
+for i in range(1,5):
+    if i == 3:
+        break
+    print(i)
+else:
+    print("loop finished")
+
+Example 2:
+name = "python"
+search = "z"
+
+for i in name:
+    if i == search:
+        print("found")
+        break
+else:
+    print("not found")
+
+
+# Non-Primitive Data Types
+
+## List
+- Mutable, ordered collection of items
+- Can store any data type: int, float, str, list, etc.
+- Indicated by []
+
+Why List?
+- Store multiple values in one variable
+- Can modify (add, update, remove) items
+
+List Indexing:
+nums = [10, 20, 30, 40]
+
+print(nums[0])      # 10
+print(nums[1])      # 20
+print(nums[-1])     # 40
+print(nums[1:4])    # [20, 30, 40]
+print(nums[::2])    # [10, 30]
+
+nums[1] = 200
+print(nums)         # [10, 200, 30, 40]
+
+nums.append(60)
+nums.insert(1, 50)
+
+List Methods:
+nums.extend([100, 200])   # adds multiple values
+nums.remove(30)           # removes 30
+nums.count(10)            # count occurrences of 10
+nums.index(10)            # index of 10
+nums.sort()               # ascending sort
+nums.sort(reverse=True)   # descending sort
+
+Loops in List:
+fruits = ["banana", "orange", "apple"]
+for i in fruits:
+    print(i)
+
+Matrix:
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+for row in matrix:
+    for col in row:
+        print(col)
+
+
+## Tuple
+- Immutable, ordered collection of elements
+- Cannot modify elements
+- Follows indexing
+
+Syntax:
+t = ()
+t = tuple()
+t = (10, 20, 30)
+
+Tuple Operations:
+print(t[1:4])       # slicing
+print(t.count(20))  # count occurrences
+print(t.index(10))  # index of element
+
+Packing & Unpacking:
+t = (10, 20, 30, 40)
+a, b, c, d = t
+
+print(a)            # 10
+print(b)            # 20
+print(a, b, c, d)   # 10 20 30 40
+
+
+# Difference Between List and Tuple
+
+Feature    | List []   | Tuple ()
+-----------|-----------|---------
+Syntax     | []        | ()
+Mutable    | Yes       | No
+Methods    | Many      | Few
+Speed      | Slow      | Fast
+Use Case   | Dynamic   | Fixed data

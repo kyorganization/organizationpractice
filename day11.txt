@@ -1,0 +1,186 @@
+# 🍇 Sets in Python
+
+👉 A set is an unordered collection of unique elements.  
+👉 Features:
+- Fast membership testing (check if an item exists)
+- Automatically removes duplicates
+- Supports mathematical operations (union, intersection, difference, etc.)
+
+# 📝 Creating Sets
+fruits = {"apple","banana","orange"}
+print(fruits)
+print(type(fruits))
+
+# Empty set
+empty_set = set()
+print(empty_set)
+
+# From list
+num = set([1,2,3,4,5])
+print(num)
+
+# From string
+letters = set("hello")
+print(letters)
+
+# Duplicates removed automatically
+nums = {1,2,2,3,3,3,4,5}
+print(nums)
+
+my_list = [1,2,2,3,3,4,5,5]
+unique = set(my_list)
+print(unique)
+
+# Removing duplicate names
+student_names = ["alice","bob","Charlie","alice","David","bob"]
+print(student_names)
+unique = set(student_names)
+print(unique)
+
+
+# ➕ Basic Set Operations
+
+# add() → add single element
+fruits = {"apple","banana"}
+fruits.add("orange")
+
+# update() → add multiple elements
+fruits.update(["orange","mango","grape"])
+print(fruits)
+
+letters = {"a","b"}
+letters.update("cd")   # {"a","b","c","d"}
+print(letters)
+
+# ➖ Removing elements
+fruits = {"apple","banana"}
+fruits.remove("banana")   # throws error if not present
+print(fruits)
+
+fruits = {"apple","banana","orange"}
+fruits.discard("apple")   # no error if not present
+print(fruits)
+
+# pop() → removes random element
+fruits = {"apple","banana","orange"}
+fruits.pop()
+print(fruits)
+
+# clear() → removes all elements
+fruits = {"apple","banana","orange"}
+fruits.clear()
+print(fruits)
+
+
+# 🔍 Membership Testing
+fruits = {"apple","banana","orange"}
+print("apple" in fruits)
+print("kiwi" in fruits)
+print("kiwi" not in fruits)
+
+# 📊 Flowchart: Membership Testing
+        ┌───────────────┐
+        │   Check item   │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ If in set?      │──Yes──► True
+        └───────┬────────┘
+                │No
+                ▼
+        ┌───────────────┐
+        │ Return False   │
+        └───────────────┘
+
+
+# 🏫 Checking Attendance
+reg_stud = {"alice","bob","charlie","david","eve"}
+pres_today = {"alice","Charlie","David"}
+
+print(len(reg_stud))
+print(len(pres_today))
+
+print("alice" in pres_today)
+print("bob" in pres_today)
+
+absent_stud = reg_stud - pres_today
+print(absent_stud)
+
+
+# ➗ Set Mathematical Operations
+
+# Union (|) → combines all unique elements
+set_a = {1,2,3,4}
+set_b = {3,4,5,6}
+
+u = set_a | set_b
+print(u)
+
+u1 = set_a.union(set_b)
+print(u1)
+
+set_c = {7,8}
+mul_s = set_a | set_b | set_c
+print(mul_s)
+
+# 📊 Flowchart: Union
+        ┌───────────────┐
+        │ Take Set A     │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Add all from B  │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Remove dups     │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Return Union    │
+        └────────────────┘
+
+
+# Intersection (&) → common elements
+inter = set_a & set_b
+print(inter)
+
+inte = set_a.intersection(set_b)
+print(inte)
+
+# Difference (-) → elements in first set but not in second
+dif = set_a - set_b
+print(dif)
+print(set_a.difference(set_b))   # {1,2}
+print(set_b.difference(set_a))   # {5,6}
+
+# Symmetric Difference (^) → elements in either set but not both
+sym_di = set_a ^ set_b
+print(sym_di)
+print(set_a.symmetric_difference(set_b))
+
+
+# 🎓 Student Course Enrollment
+python_stu = {"alice","bob","Charlie","David","eve"}
+java_stu   = {"Charlie","David","frank","grace"}
+web_stu    = {"alice","frank","grace","henry"}
+
+print(python_stu)
+print(java_stu)
+print(web_stu)
+
+# Students taking both Java and Python
+both_py_java = python_stu & java_stu
+print(both_py_java)
+
+# All students
+all_stu = python_stu | java_stu | web_stu
+print(all_stu)
+
+# Only Python (not Java)
+only_py = python_stu - java_stu
+print(only_py)
+
+# Taking all 3 courses
+all_three = python_stu & java_stu & web_stu
+print(all_three)

@@ -1,0 +1,190 @@
+# ⚖️ Conditional Statements
+
+-> if statement  
+* Allows Python to execute a block if condition is TRUE  
+* If the condition is FALSE, that block is skipped  
+
+Syntax:
+if condition:
+    # block of code
+
+Example:
+age = 20
+if age >= 18:
+    print("✅ You can vote")
+
+# 📊 Flowchart: if statement
+        ┌───────────────┐
+        │   Condition?   │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ True            │──► Execute block
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ False           │──► Skip block
+        └────────────────┘
+
+
+-> if-else  
+* If condition is TRUE → if block executes  
+* If condition is FALSE → else block executes  
+
+Syntax:
+if condition:
+    # block of code
+else:
+    # block of code
+
+Example:
+age = 16
+if age >= 18:
+    print("✅ Eligible to vote")
+else:
+    print("❌ Not eligible to vote")
+
+# 📊 Flowchart: if-else
+        ┌───────────────┐
+        │   Condition?   │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ True            │──► Execute IF block
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ False           │──► Execute ELSE block
+        └────────────────┘
+
+
+-> if-elif-else ladder  
+* Multiple conditions checked in sequence  
+
+Syntax:
+if condition:
+    # code
+elif condition:
+    # code
+elif condition:
+    # code
+else:
+    # code
+
+Example:
+marks = 65
+if marks >= 90:
+    print("Grade A+")
+elif marks >= 80:
+    print("Grade A")
+elif marks >= 70:
+    print("Grade B")
+elif marks >= 60:
+    print("Grade C")
+else:
+    print("Fail")
+
+# 📊 Flowchart: if-elif-else
+        ┌───────────────┐
+        │ Condition 1?   │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ True            │──► Block 1
+        └───────┬────────┘
+                │False
+                ▼
+        ┌───────────────┐
+        │ Condition 2?   │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ True            │──► Block 2
+        └───────┬────────┘
+                │False
+                ▼
+        ┌───────────────┐
+        │ Condition 3?   │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ True            │──► Block 3
+        └───────┬────────┘
+                │False
+                ▼
+        ┌───────────────┐
+        │ Else Block     │
+        └────────────────┘
+
+
+-> Nested if  
+* if inside another if  
+* Inner if executes only if outer if is TRUE  
+
+Example 1:
+age = 17
+has_id = True
+
+if age >= 18:
+    if has_id:
+        print("✅ You can enter the room")
+    else:
+        print("⚠️ You must bring ID")
+else:
+    print("❌ You are under age")
+
+Example 2:
+balance = 1000
+withdraw = 500
+pin_correct = True
+
+if pin_correct:
+    if withdraw <= balance:
+        print("✅ Transaction successful")
+    else:
+        print("❌ Insufficient balance")
+else:
+    print("❌ Incorrect PIN")
+
+# 📊 Flowchart: Nested if
+        ┌───────────────┐
+        │ Outer IF cond? │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ True            │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Inner IF cond?  │
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ True            │──► Inner block
+        └───────┬────────┘
+                │False
+                ▼
+        ┌───────────────┐
+        │ Inner ELSE     │
+        └───────────────┘
+                │
+        ┌───────▼────────┐
+        │ Outer ELSE      │
+        └────────────────┘
+
+
+-> Single line (short-hand) if statement  
+
+Syntax:
+if condition: # block of code
+
+if-else (ternary operator):
+# block_if_true if condition else block_if_false
+
+Example 1:
+age = 18
+print("✅ Eligible to vote") if age >= 18 else print("❌ Not eligible")
+
+Example 2:
+num = 7
+print("even") if num % 2 == 0 else print("odd")

@@ -1,0 +1,212 @@
+# ⚖️ Else Clause in Try-Except
+
+👉 The 'else' clause in a try-except block runs **only if no exception occurs** in the try block.
+
+Syntax:
+try:
+    # code that might raise exception
+except SomeError:
+    # handle error
+else:
+    # runs only if try succeeds
+
+✅ Why use else?
+1. Separates error-handling code from success code  
+2. Makes code more readable  
+3. Ensures code only runs when try block succeeds  
+4. Better than putting code at end of try block (which runs even if exception occurs)  
+
+⚠️ IMPORTANT: The else block runs **before** the finally block (if present).
+
+# 📊 Flowchart: Try-Except-Else
+        ┌───────────────┐
+        │     Try block  │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Exception?      │
+        └───────┬────────┘
+        Yes     │        No
+        │       ▼
+        ▼   ┌───────────────┐
+ ┌─────────►│ Else block     │
+ │          └───────┬────────┘
+ │                  │
+ │          ┌───────▼────────┐
+ │          │ Continue code   │
+ │          └────────────────┘
+ ▼
+┌───────────────┐
+│ Except block   │
+└───────────────┘
+
+
+# 📝 Example
+def process_number_with_else(value):
+    try:
+        number = float(value)
+    except ValueError:
+        print("value is not a number")
+        return None
+    else:
+        print(f"{value} converted to {number}")
+        squared = number**2
+        print(f"squared = {squared}")
+        return squared
+
+process_number_with_else("42")
+
+
+# 🔚 Finally Clause
+
+👉 The "finally" clause always executes, regardless of whether an exception occurred or not.  
+👉 Common uses:
+- Closing files  
+- Cleanup operations  
+- Logging  
+
+Syntax:
+try:
+    # code
+except SomeError:
+    # handle error
+finally:
+    # cleanup code (always runs)
+
+# 📊 Flowchart: Try-Except-Finally
+        ┌───────────────┐
+        │     Try block  │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Exception?      │
+        └───────┬────────┘
+        Yes     │        No
+        │       ▼
+        ▼   ┌───────────────┐
+ ┌─────────►│ Continue code  │
+ │          └───────┬────────┘
+ │                  │
+ ▼                  ▼
+┌───────────────┐   ┌───────────────┐
+│ Except block   │   │ Finally block │
+└───────┬────────┘   └───────┬──────┘
+        │                    │
+        └───────────────►────┘
+               Always runs
+
+
+# 📝 Example
+def connect_to_server(server_address):
+    try:
+        print(f"attempting to connect to {server_address}")
+        if server_address == "":
+            return "Empty server address"
+        connection = f"connection to {server_address}"
+        print("connected successfully")
+    except ValueError as e:
+        print(f"configuration error: {e}")
+        return False
+    finally:
+        if connection:
+            print(f"closing connection to {server_address}")
+        print("cleanup completed")
+
+server = "goog.server.com"
+
+
+# 🚨 Raising Exceptions
+
+👉 We can raise exceptions manually using the "raise" keyword.  
+👉 Useful for:
+- Input validation  
+- Enforcing business rules  
+- Signaling error conditions  
+- Creating custom error messages  
+
+Syntax:
+raise ExceptionType("error message")
+
+Common patterns:
+- raise ValueError("invalid value")  
+- raise TypeError("wrong type")  
+
+# 📝 Example
+def validate_age(age):
+    if not isinstance(age, int):
+        raise TypeError("age must be an integer")
+    if age < 0:
+        raise ValueError("age must be positive")
+    if age > 150:
+        raise ValueError("age must be less than 150")
+    return True
+
+try:
+    validate_age(25)
+    print("age is 25")
+except (TypeError, ValueError) as e:
+    print(f"error: {e}")
+
+
+# 🏛️ Exception Hierarchy
+
+👉 All exceptions in Python inherit from the BaseException class.
+
+BaseException  
+    ├── SystemExit (sys.exit())  
+    ├── KeyboardInterrupt (Ctrl+C)  
+    └── Exception (base for most exceptions)  
+        ├── ArithmeticError  
+        │   ├── ZeroDivisionError  
+        │   ├── OverflowError  
+        │   └── FloatingPointError  
+        ├── LookupError  
+        │   ├── IndexError  
+        │   └── KeyError  
+        ├── TypeError  
+        ├── ValueError  
+        ├── NameError  
+        ├── AttributeError  
+        ├── IOError / OSError  
+        │   ├── FileNotFoundError  
+        │   ├── PermissionError  
+        │   └── IsDirectoryError  
+        └── RuntimeError  
+            └── RecursionError  
+
+# 📊 Flowchart: Exception Handling Order
+        ┌───────────────┐
+        │     Try block  │
+        └───────┬───────┘
+                │
+        ┌───────▼────────┐
+        │ Exception raised│
+        └───────┬────────┘
+                │
+        ┌───────▼────────┐
+        │ Match specific  │
+        │ except first    │
+        └───────┬────────┘
+                │No match
+                ▼
+        ┌───────────────┐
+        │ Next broader   │
+        │ except block   │
+        └───────┬────────┘
+                │No match
+                ▼
+        ┌───────────────┐
+        │ Generic except │
+        │ (Exception)    │
+        └────────────────┘
+
+# 📝 Example
+def demonstrate_hierarchy():
+    try:
+        result = 10 / 0
+    except ZeroDivisionError:   # most specific
+        print("division by zero")
+    except ArithmeticError:     # more general
+        print("caught ArithmeticError")
+    except Exception:           # most generic
+        print("caught exception")

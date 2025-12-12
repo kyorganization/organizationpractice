@@ -1,0 +1,115 @@
+# 🔙 Role of the Backslash
+- \n → inserts a new line (line break)
+- \t → inserts a tab space
+
+# 📝 Examples
+print("hi \" hello")       # escaping double quotes
+print("hi\\hello")         # escaping backslash itself
+
+# 🔍 Regex Examples
+import re
+
+# [^arn] → match any character except a, r, n
+txt = "the rain in spain"
+print(re.findall("[^arn]", txt))
+
+# [0123] → match digits 0,1,2,3
+txt = "the rain 1 in 4 3 spain"
+print(re.findall("[0123]", txt))
+
+# [0-9] → match all digits
+txt = "the rain1 in 4 3 spain"
+print(re.findall("[0-9]", txt))
+
+# [0-5][0-9] → match minutes (00–59)
+txt = "the time is 11:45 AM"
+print(re.findall("[0-5][0-9]", txt))
+
+# [a-zA-Z] → match all letters
+txt = "the rain1 in 4 3 spain"
+print(re.findall("[a-zA-Z]", txt))
+
+# [+] → matches literal plus sign
+txt = "the rain in spain"
+x = re.search(r"\s", txt)   # \s → whitespace
+print(x)
+print(x.start(), x.end())
+
+# Search for "spain"
+txt = "the rain in spain"
+x = re.search("spain", txt)
+print(x)
+print(x.start(), x.end(), x.span(), x.group())
+
+# split() → split string at matches
+txt = "the rain in and moon in sky"
+print(re.split("in", txt))
+
+# split with \s → whitespace
+txt = "the rain in and moon in sky"
+print(re.split(r"\s", txt, 1))   # split once
+
+# sub() → replace text
+txt = "the rain in and moon in sky"
+print(re.sub(r"\s", "8", txt))
+
+
+# 📝 Introduction to Logging
+
+## ❌ Why not print?
+- Only shows output to console
+- No levels
+- Not configurable
+- Hard to remove in production
+- No timestamps or metadata
+
+## ✅ Why logging?
+- Can write to files, console, networks, DB
+- Has 5 levels (Debug → Critical)
+- Fully configurable
+
+## 📊 Standard Logging Levels
+Level      | Value | Meaning
+-----------|-------|--------------------------------------------
+DEBUG      | 10    | Detailed info for debugging
+INFO       | 20    | Program working as expected
+WARNING    | 30    | Something unexpected happened but still works
+ERROR      | 40    | Major error
+CRITICAL   | 50    | Serious issue, program may not continue
+
+
+# ⚙️ Logging Examples
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logging.debug("🐞 this is a debug message")
+logging.info("ℹ️ this is an info message")
+logging.warning("⚠️ this is a warning message")
+logging.error("❌ this is an error message")
+logging.critical("🔥 this is a critical message")
+
+# 📂 Logging to file with format
+logging.basicConfig(
+    filename="app.log",
+    level=logging.DEBUG,
+    format="%(asctime)s %(levelname)s %(message)s"
+)
+
+logging.debug("🐞 debug message")
+logging.info("ℹ️ info message")
+logging.warning("⚠️ warning message")
+logging.error("❌ error message")
+logging.critical("🔥 critical message")
+
+# 🧮 Example with try-except-finally
+try:
+    a = 10
+    b = 20
+    logging.info(f"a value is {a}")
+    logging.info(f"b value is {b}")
+    total = a + b
+    logging.info(f"total is {total}")
+except Exception as e:
+    logging.error(f"something went wrong : {e}")
+finally:
+    logging.info("✅ executed successfully")
